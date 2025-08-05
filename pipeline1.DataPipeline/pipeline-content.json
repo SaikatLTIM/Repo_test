@@ -2,11 +2,11 @@
   "properties": {
     "activities": [
       {
-        "name": "Wait10",
+        "name": "Wait1",
         "type": "Wait",
         "dependsOn": [],
         "typeProperties": {
-          "waitTimeInSeconds": 10
+          "waitTimeInSeconds": 1
         }
       }
     ]
