@@ -1,0 +1,135 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "name": "Copy data1",
+        "type": "Copy",
+        "dependsOn": [],
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "typeProperties": {
+          "source": {
+            "type": "AzureSqlSource",
+            "queryTimeout": "02:00:00",
+            "partitionOption": "None",
+            "datasetSettings": {
+              "annotations": [],
+              "type": "AzureSqlTable",
+              "schema": [],
+              "typeProperties": {
+                "schema": "dbo",
+                "table": "SampleGuidTable",
+                "database": "SaikatDB"
+              },
+              "externalReferences": {
+                "connection": "04e3ec4d-2b8d-4f91-a259-f8ba9dc06d88"
+              }
+            }
+          },
+          "sink": {
+            "type": "LakehouseTableSink",
+            "tableActionOption": "Append",
+            "partitionOption": "None",
+            "applyVOrder": true,
+            "datasetSettings": {
+              "annotations": [],
+              "linkedService": {
+                "name": "DataflowsStagingLakehouse",
+                "properties": {
+                  "annotations": [],
+                  "type": "Lakehouse",
+                  "typeProperties": {
+                    "workspaceId": "2184f053-d94b-49e1-8d79-81b8331bd0eb",
+                    "artifactId": "72179c10-f4f9-4fb3-82b4-0dd25dc55a6c",
+                    "rootFolder": "Tables"
+                  }
+                }
+              },
+              "type": "LakehouseTable",
+              "schema": [],
+              "typeProperties": {
+                "table": "output_guid"
+              }
+            }
+          },
+          "enableStaging": false,
+          "translator": {
+            "type": "TabularTranslator",
+            "mappings": [
+              {
+                "source": {
+                  "name": "RecordID",
+                  "type": "Guid",
+                  "physicalType": "uniqueidentifier"
+                },
+                "sink": {
+                  "name": "RecordID",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "TransactionID",
+                  "type": "Guid",
+                  "physicalType": "uniqueidentifier"
+                },
+                "sink": {
+                  "name": "TransactionID",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "Name",
+                  "type": "String",
+                  "physicalType": "varchar",
+                  "length": "50"
+                },
+                "sink": {
+                  "name": "Name",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "Amount",
+                  "type": "Decimal",
+                  "physicalType": "decimal",
+                  "scale": 2,
+                  "precision": 10
+                },
+                "sink": {
+                  "name": "Amount",
+                  "physicalType": "decimal",
+                  "scale": 2,
+                  "precision": 10
+                }
+              },
+              {
+                "source": {
+                  "name": "CreatedDate",
+                  "type": "DateTime",
+                  "physicalType": "datetime"
+                },
+                "sink": {
+                  "name": "CreatedDate",
+                  "physicalType": "timestamp"
+                }
+              }
+            ],
+            "typeConversion": true,
+            "typeConversionSettings": {
+              "allowDataTruncation": true,
+              "treatBooleanAsNumber": false
+            }
+          }
+        }
+      }
+    ]
+  }
+}

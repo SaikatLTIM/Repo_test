@@ -1,0 +1,61 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "name": "RefreshSQLEndpoint",
+        "type": "WebActivity",
+        "dependsOn": [
+          {
+            "activity": "GetToken",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ],
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "typeProperties": {
+          "method": "POST",
+          "headers": {
+            "Authorization": "Bearer @{activity('GetToken').output.access_token}",
+            "Content-type": "application/json"
+          },
+          "relativeUrl": "/v1/workspaces/2184f053-d94b-49e1-8d79-81b8331bd0eb/sqlEndpoints/cd2d06f6-d917-4026-88fd-195862a09ccd/refreshMetadata",
+          "body": {
+            "refreshType": "Full"
+          }
+        },
+        "externalReferences": {
+          "connection": "9b266fe3-4417-4580-a5d4-72851fa03d80"
+        }
+      },
+      {
+        "name": "GetToken",
+        "type": "WebActivity",
+        "dependsOn": [],
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "typeProperties": {
+          "method": "POST",
+          "headers": {
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          "body": "client_id=b883b765-ea55-40db-b8d8-be56ec9e540c\n&client_secret=Vyv8Q~AxEOuiV9YUjMsItktXJs--N.oyuQ1LfaJq\n&grant_type=client_credentials\n&scope=https://api.fabric.microsoft.com/.default"
+        },
+        "externalReferences": {
+          "connection": "6223cf80-ef11-4ac6-99f5-55145c8b9edb"
+        }
+      }
+    ]
+  }
+}
