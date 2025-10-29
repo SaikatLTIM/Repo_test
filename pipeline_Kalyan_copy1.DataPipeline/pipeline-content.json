@@ -28,7 +28,7 @@
             },
             "Content-type": "application/json"
           },
-          "relativeUrl": "/v1/workspaces/2184f053-d94b-49e1-8d79-81b8331bd0eb/sqlEndpoints/cd2d06f6-d917-4026-88fd-195862a09ccd/refreshMetadata",
+          "relativeUrl": "/v1/workspaces/9adb7a51-b8db-4728-afe7-710edae594b3/sqlEndpoints/4c1529d3-80ab-41f8-aeff-9bfaae252f88/refreshMetadata",
           "body": {
             "refreshType": "Full"
           }
