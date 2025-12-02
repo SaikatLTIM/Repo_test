@@ -8,6 +8,39 @@
         "typeProperties": {
           "waitTimeInSeconds": 1
         }
+      },
+      {
+        "name": "Lookup1",
+        "type": "Lookup",
+        "dependsOn": [],
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "typeProperties": {
+          "source": {
+            "type": "AzurePostgreSqlSource",
+            "partitionOption": "None",
+            "queryTimeout": "02:00:00"
+          },
+          "firstRowOnly": true,
+          "datasetSettings": {
+            "annotations": [],
+            "type": "AzurePostgreSqlTable",
+            "schema": [],
+            "typeProperties": {
+              "schema": "information_schema",
+              "table": "column_column_usage"
+            },
+            "version": "2.0",
+            "externalReferences": {
+              "connection": "47bcf26f-af4b-4afe-93cb-a678692c9676"
+            }
+          }
+        }
       }
     ]
   }
